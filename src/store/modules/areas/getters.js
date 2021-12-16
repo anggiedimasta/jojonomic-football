@@ -1,6 +1,16 @@
+import { filter } from 'underscore'
+
 const getters = {
-	areas(state) {
-		return state.areas
+	filtered_areas(state, _getters, rootState, _rootGetters) {
+		if (rootState.search_query.length <= 0) return state.areas
+
+		return filter(
+			state.areas,
+			(area) =>
+				area.name
+					.toLowerCase()
+					.search(rootState.search_query.toLowerCase()) >= 0,
+		)
 	},
 }
 

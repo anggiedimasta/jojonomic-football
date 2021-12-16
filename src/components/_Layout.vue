@@ -16,12 +16,14 @@
 						.relative.text-white(class='focus-within:text-gray-600')
 							.pointer-events-none.absolute.inset-y-0.left-0.pl-3.flex.items-center
 								SearchIcon.h-5.w-5(aria-hidden='true')
-							input#desktop-search.block.w-full.bg-white.bg-opacity-20.py-2.pl-10.pr-3.border.border-transparent.rounded-md.leading-5.text-gray-900.placeholder-white(
+							input.block.w-full.bg-white.bg-opacity-20.py-2.pl-10.pr-3.border.border-transparent.rounded-md.leading-5.placeholder-white.text-white(
+								@input='onSearch'
 								autocomplete='area'
-								class='focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm'
+								class='focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm focus:text-gray-700'
 								placeholder='Search'
 								type='search'
 								name='search'
+								v-model='search_query'
 							)
 				.absolute.right-0.flex-shrink-0(class='lg:hidden')
 					PopoverButton.bg-transparent.p-2.rounded-md.inline-flex.items-center.justify-center.text-indigo-200(class='hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white')
@@ -45,12 +47,14 @@
 							.relative.text-white(class='focus-within:text-gray-600')
 								.pointer-events-none.absolute.inset-y-0.left-0.pl-3.flex.items-center
 									SearchIcon.h-5.w-5(aria-hidden='true')
-								input#mobile-search.block.w-full.bg-white.bg-opacity-20.py-2.pl-10.pr-3.border.border-transparent.rounded-md.leading-5.text-gray-900.placeholder-white(
+								input.block.w-full.bg-white.bg-opacity-20.py-2.pl-10.pr-3.border.border-transparent.rounded-md.leading-5.placeholder-white.text-white(
+									@input='onSearch'
 									autocomplete='area'
-									class='focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm'
+									class='focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm focus:text-gray-700'
 									placeholder='Search'
 									type='search'
 									name='search'
+									v-model='search_query'
 								)
 		TransitionRoot(as='template' :show='open')
 			div(class='lg:hidden')
@@ -87,10 +91,11 @@
 </template>
 
 <script>
-	import { MenuIcon, XIcon } from '@heroicons/vue/outline'
-	import { defineComponent } from 'vue'
+	import { defineComponent, ref } from 'vue'
 	import { filter } from 'underscore'
+	import { MenuIcon, XIcon } from '@heroicons/vue/outline'
 	import { useRoute, useRouter } from 'vue-router'
+	import { useStore } from 'vuex'
 
 	import {
 		Menu,
@@ -127,21 +132,23 @@
 		setup() {
 			const route = useRoute()
 			const router = useRouter()
-			const user = {
-				name: 'Tom Cook',
-				email: 'tom@example.com',
-				imageUrl:
-					'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-			}
+			const store = useStore()
+			let search_query = ref('')
 
 			const routes = filter(
 				router.options.routes,
 				(r) => !r.meta || !r.meta.hide,
 			)
+
+			function onSearch() {
+				store.dispatch('setSearchQuery', search_query.value)
+			}
+
 			return {
+				onSearch,
 				route,
 				routes,
-				user,
+				search_query,
 			}
 		},
 	})

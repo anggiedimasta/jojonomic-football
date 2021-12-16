@@ -5,11 +5,11 @@
 		ul.mt-3.grid.grid-cols-1.gap-6(
 			class='sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
 			role='list'
-			v-if='teams.length > 0'
+			v-if='filtered_teams && filtered_teams.length > 0'
 		)
 			li.col-span-1.flex.flex-col.text-center.bg-white.rounded-lg.shadow.divide-y.divide-gray-200(
 				:key='team.id'
-				v-for='team in teams'
+				v-for='team in filtered_teams'
 			)
 				.w-full.h-24.rounded-t-lg.flex(:class='`bg-${getBgColor(team.clubColors)}`')
 				.flex-1.flex.flex-col.p-8.-mt-24
@@ -24,16 +24,20 @@
 					)
 					h3.mt-6.text-gray-900.text-sm.font-medium {{ team.name }}
 					dl.mt-1.flex-grow.flex.flex-col.justify-between
-						dt.sr-only Address
-						dd.text-gray-500.text-sm {{ team.address }}
-						dt.sr-only Phone
-						dd.mt-3
-							span.px-2.py-1.text-gray-600.text-xs.bg-gray-50.rounded-full {{ team.phone }}
-						dt.sr-only Email
-						dd.mt-1
-							span.px-2.py-1.text-gray-600.text-xs.bg-gray-50.rounded-full {{ team.email }}
-						dt.sr-only Website
-						dd.mt-1
+						dt.sr-only(v-if='team.address') Address
+						dd.text-gray-500.text-sm(v-if='team.address') {{ team.address }}
+						dt.sr-only(v-if='team.phone') Phone
+						dd.mt-3(v-if='team.phone')
+							.px-2.py-1.text-gray-600.text-xs.bg-gray-50.rounded-full.inline-flex.items-center
+								PhoneIcon.inline-flex.h-3.w-3.mr-1(aria-hidden='true')
+								.inline-flex {{ team.phone }}
+						dt.sr-only(v-if='team.email') Email
+						dd.mt-1(v-if='team.email')
+							.px-2.py-1.text-gray-600.text-xs.bg-gray-50.rounded-full.inline-flex.items-center
+								MailIcon.inline-flex.h-3.w-3.mr-1(aria-hidden='true')
+								.inline-flex {{ team.email }}
+						dt.sr-only(v-if='team.website') Website
+						dd.mt-3(v-if='team.website')
 							a.px-2.py-1.text-xs.text-green-500.font-medium.bg-green-50.rounded-full(
 								:href='team.website'
 								rel='noopener noreferrer nofollow'
@@ -48,7 +52,7 @@
 </template>
 
 <script>
-	import { ArrowUpIcon } from '@heroicons/vue/solid'
+	import { ArrowUpIcon, MailIcon, PhoneIcon } from '@heroicons/vue/solid'
 	import { EmojiSadIcon, FlagIcon } from '@heroicons/vue/outline'
 	import { computed, defineComponent } from 'vue'
 	import { useRoute } from 'vue-router'
@@ -56,11 +60,19 @@
 
 	export default defineComponent({
 		name: 'Area',
-		components: { ArrowUpIcon, EmojiSadIcon, FlagIcon },
+		components: {
+			ArrowUpIcon,
+			EmojiSadIcon,
+			FlagIcon,
+			MailIcon,
+			PhoneIcon,
+		},
 		setup() {
 			const route = useRoute()
 			const store = useStore()
-			const teams = computed(() => store.getters['TEAMS/teams'])
+			const filtered_teams = computed(
+				() => store.getters['TEAMS/filtered_teams'],
+			)
 
 			store.dispatch('TEAMS/getTeams', route.params.id)
 
@@ -75,7 +87,7 @@
 					: color
 			}
 
-			return { getBgColor, teams }
+			return { filtered_teams, getBgColor }
 		},
 	})
 </script>

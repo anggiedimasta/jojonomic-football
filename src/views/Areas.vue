@@ -5,11 +5,12 @@
 		ul.mt-3.grid.grid-cols-1.gap-5(
 			class='sm:gap-6 sm:grid-cols-2 lg:grid-cols-4'
 			role='list'
+			v-if='filtered_areas && filtered_areas.length > 0'
 		)
 			router-link.flex.col-span-1(
 				:to='{ name: "Area", params: { id: area.id} }'
 				:key='area.id'
-				v-for='area in areas'
+				v-for='area in filtered_areas'
 			)
 				li.w-full.flex.shadow-sm.rounded-md
 					div(
@@ -23,10 +24,15 @@
 								class='hover:text-gray-600'
 							) {{ area.name }}
 							p.text-gray-500 {{ area.parentArea }}
+		.text-center(v-else)
+			EmojiSadIcon.mx-auto.h-12.w-12.text-gray-400(aria-hidden='true')
+			h3.mt-2.text-sm.font-medium.text-gray-900 No areas
+			p.mt-1.text-sm.text-gray-500 There is no area data available.
 </template>
 
 <script>
 	import { computed, defineComponent } from 'vue'
+	import { EmojiSadIcon } from '@heroicons/vue/outline'
 	import { filter, flatten, isObject, map, sample } from 'underscore'
 	import { useStore } from 'vuex'
 
@@ -35,9 +41,12 @@
 
 	export default defineComponent({
 		name: 'Areas',
+		components: { EmojiSadIcon },
 		setup() {
 			const store = useStore()
-			const areas = computed(() => store.getters['AREAS/areas'])
+			const filtered_areas = computed(
+				() => store.getters['AREAS/filtered_areas'],
+			)
 
 			store.dispatch('AREAS/getAreas')
 
@@ -58,7 +67,7 @@
 			}
 
 			return {
-				areas,
+				filtered_areas,
 				getRandomColor,
 			}
 		},
