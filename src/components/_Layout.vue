@@ -9,7 +9,7 @@
 				.absolute.left-0.flex-shrink-0(class='lg:static')
 					a(href='#')
 						span.sr-only Workflow
-						img.h-8.w-auto(src='/favicon.ico' alt='Workflow')
+						img.h-8.w-auto(src='favicon.ico' alt='Workflow')
 				.flex-1.min-w-0.px-12(class='lg:hidden')
 					.max-w-xs.w-full.mx-auto
 						label.sr-only(for='desktop-search') Search
@@ -62,7 +62,7 @@
 							.pt-3.pb-2
 								.flex.items-center.justify-between.px-4
 									div
-										img.h-8.w-auto(src='/favicon.ico' alt='Workflow')
+										img.h-8.w-auto(src='favicon.ico' alt='Workflow')
 									.-mr-2
 										PopoverButton.bg-white.rounded-md.p-2.inline-flex.items-center.justify-center.text-gray-400(class='hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500')
 											span.sr-only Close menu
