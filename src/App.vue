@@ -1,6 +1,18 @@
-<template lang="pug">
-.app
-	router-view
+<template>
+	<div id="app">
+		<Layout>
+			<template #content>
+				<router-view />
+			</template>
+		</Layout>
+	</div>
 </template>
+<script>
+	import { defineComponent } from 'vue'
+	import { Layout } from '@/components'
 
-<style lang="sass" src="@/stylesheets/app.sass" />
+	export default defineComponent({
+		name: 'App',
+		components: { Layout },
+	})
+</script>

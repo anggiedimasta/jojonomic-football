@@ -1,11 +1,17 @@
 <template lang="pug">
-.home
+.area
 </template>
 
 <script>
 	import { defineComponent } from 'vue'
+	import { useStore } from 'vuex'
 
 	export default defineComponent({
-		name: 'Home',
+		name: 'Area',
+		setup() {
+			const store = useStore()
+
+			return {}
+		},
 	})
 </script>
