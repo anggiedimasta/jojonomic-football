@@ -87,10 +87,11 @@
 </template>
 
 <script>
-	import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
+	import { MenuIcon, XIcon } from '@heroicons/vue/outline'
 	import { defineComponent } from 'vue'
 	import { filter } from 'underscore'
 	import { useRoute, useRouter } from 'vue-router'
+
 	import {
 		Menu,
 		MenuButton,
@@ -103,12 +104,12 @@
 		TransitionChild,
 		TransitionRoot,
 	} from '@headlessui/vue'
+
 	import { SearchIcon } from '@heroicons/vue/solid'
 
 	export default defineComponent({
 		name: 'Layout',
 		components: {
-			BellIcon,
 			Menu,
 			MenuButton,
 			MenuIcon,
@@ -137,7 +138,6 @@
 				router.options.routes,
 				(r) => !r.meta || !r.meta.hide,
 			)
-
 			return {
 				route,
 				routes,
