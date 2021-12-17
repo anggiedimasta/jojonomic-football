@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/anggiedimasta/jojonomic-football/compare/v0.1.9...v0.1.10) (2021-12-17)
+
+
+### Bug Fixes
+
+* **path:** router path redirect from home to areas ([0385bdf](https://github.com/anggiedimasta/jojonomic-football/commit/0385bdfebc183a128fae5276c9f8413a9c108eea))
+
 ### [0.1.9](https://github.com/anggiedimasta/jojonomic-football/compare/v0.1.8...v0.1.9) (2021-12-17)
 
 
