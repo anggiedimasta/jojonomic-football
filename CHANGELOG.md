@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.11](https://github.com/anggiedimasta/jojonomic-football/compare/v0.1.10...v0.1.11) (2021-12-17)
+
+
+### Features
+
+* **player:** showing player modal ([efc88aa](https://github.com/anggiedimasta/jojonomic-football/commit/efc88aad7e926475b72305a5c307b69cf07ea284))
+
 ### [0.1.10](https://github.com/anggiedimasta/jojonomic-football/compare/v0.1.9...v0.1.10) (2021-12-17)
 
 
