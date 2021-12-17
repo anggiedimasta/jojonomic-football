@@ -1,6 +1,5 @@
 const state = {
-	area: null,
-	areas: null,
+	player: null,
 }
 
 export { state }

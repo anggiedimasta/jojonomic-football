@@ -9,7 +9,7 @@
 				.absolute.left-0.flex-shrink-0(class='lg:static')
 					a(href='#')
 						span.sr-only Workflow
-						img.h-8.w-auto(src='favicon.ico' alt='Workflow')
+						img.h-8.w-auto(src='/favicon.ico' alt='Workflow')
 				.flex-1.min-w-0.px-12(class='lg:hidden')
 					.max-w-xs.w-full.mx-auto
 						label.sr-only(for='desktop-search') Search
@@ -66,7 +66,7 @@
 							.pt-3.pb-2
 								.flex.items-center.justify-between.px-4
 									div
-										img.h-8.w-auto(src='favicon.ico' alt='Workflow')
+										img.h-8.w-auto(src='/favicon.ico' alt='Workflow')
 									.-mr-2
 										PopoverButton.bg-white.rounded-md.p-2.inline-flex.items-center.justify-center.text-gray-400(class='hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500')
 											span.sr-only Close menu
@@ -80,14 +80,14 @@
 									) {{ r.name }}
 	main.-mt-24.pb-8
 		.max-w-3xl.mx-auto.px-4(class='sm:px-6 lg:max-w-7xl lg:px-8')
-			h1.sr-only Page title
+			h1.sr-only {{ route.name }}
 			.rounded-lg.bg-white.overflow-hidden.shadow.p-6
 				slot(name='content')
 	footer
 		.max-w-3xl.mx-auto.px-4(class='sm:px-6 lg:px-8 lg:max-w-7xl')
 			.border-t.border-gray-200.py-8.text-sm.text-gray-500.text-center(class='sm:text-left')
 				span.block.font-semibold(class='sm:inline') 2021 Jojonomic
-				span.block(class='sm:inline') &nbsp;Football Data.
+				span.block.italic(class='sm:inline') &nbsp;Football Data.
 </template>
 
 <script>

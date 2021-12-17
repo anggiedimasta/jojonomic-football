@@ -9,9 +9,18 @@ const routes = [
 	},
 	{
 		path: '/areas/:id',
-		name: 'Area',
+		name: 'Teams',
 		component: () =>
-			import(/* webpackChunkName: "area" */ '@/views/Area.vue'),
+			import(/* webpackChunkName: "teams" */ '@/views/Teams.vue'),
+		meta: {
+			hide: true,
+		},
+	},
+	{
+		path: '/teams/:id',
+		name: 'Team',
+		component: () =>
+			import(/* webpackChunkName: "team" */ '@/views/Team.vue'),
 		meta: {
 			hide: true,
 		},

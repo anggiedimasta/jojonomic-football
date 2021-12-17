@@ -8,7 +8,7 @@
 			v-if='filtered_areas && filtered_areas.length > 0'
 		)
 			router-link.flex.col-span-1(
-				:to='{ name: "Area", params: { id: area.id} }'
+				:to='{ name: "Teams", params: { id: area.id} }'
 				:key='area.id'
 				v-for='area in filtered_areas'
 			)

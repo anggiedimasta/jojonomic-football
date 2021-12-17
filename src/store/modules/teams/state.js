@@ -1,4 +1,5 @@
 const state = {
+	team: null,
 	teams: null,
 }
 
