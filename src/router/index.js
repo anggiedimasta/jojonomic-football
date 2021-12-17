@@ -25,6 +25,14 @@ const routes = [
 			hide: true,
 		},
 	},
+	{
+		path: '/',
+		redirect: '/areas',
+	},
+	{
+		path: '/:any',
+		redirect: '/areas',
+	},
 ]
 
 const router = createRouter({
