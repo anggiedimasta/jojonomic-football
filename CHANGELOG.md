@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.9](https://github.com/anggiedimasta/jojonomic-football/compare/v0.1.8...v0.1.9) (2021-12-17)
+
+
+### Features
+
+* **team:** team details ([5eb6dbf](https://github.com/anggiedimasta/jojonomic-football/commit/5eb6dbfa9ba56ae6b0902c5190d55a524e6005df))
+
 ### [0.1.8](https://github.com/anggiedimasta/jojonomic-football/compare/v0.1.7...v0.1.8) (2021-12-16)
 
 
