@@ -1,5 +1,9 @@
 <template lang="pug">
 .team
+	Player(
+		:player='player'
+		@close='hidePlayerModal'
+	)
 	div.p-4
 		article
 			div(v-if='team')
@@ -75,8 +79,9 @@
 				role='list'
 				v-if='filtered_players && filtered_players.length > 0'
 			)
-				li.col-span-1.flex.flex-col.text-center.bg-white.rounded-lg.shadow.divide-y.divide-gray-200(
+				li.cursor-pointer.col-span-1.flex.flex-col.text-center.bg-white.rounded-lg.shadow.divide-y.divide-gray-200(
 					:key='player.id'
+					@click='showPlayerModal(player)'
 					v-for='player in filtered_players'
 				)
 					.flex-1.flex.flex-col.p-8
@@ -123,11 +128,13 @@
 		PhoneIcon,
 		UserIcon,
 	} from '@heroicons/vue/solid'
+	import { computed, defineComponent, reactive } from 'vue'
 	import { EmojiSadIcon } from '@heroicons/vue/outline'
-	import { computed, defineComponent } from 'vue'
+	import { filter, flatten, isObject, map, sample } from 'underscore'
 	import { useRoute } from 'vue-router'
 	import { useStore } from 'vuex'
-	import { filter, flatten, isObject, map, sample } from 'underscore'
+
+	import { Player } from '@/components'
 
 	import tailwind from 'tailwind-config'
 	const { theme } = tailwind.config(require('../../tailwind.config'))
@@ -141,6 +148,7 @@
 			IdentificationIcon,
 			MailIcon,
 			PhoneIcon,
+			Player,
 			UserIcon,
 		},
 		setup() {
@@ -150,6 +158,14 @@
 				() => store.getters['TEAMS/filtered_players'],
 			)
 			const team = computed(() => store.getters['TEAMS/team'])
+			let player = reactive({
+				countryOfBirth: '',
+				dateOfBirth: '',
+				name: '',
+				nationality: '',
+				position: '',
+				shirtNumber: '',
+			})
 
 			store.dispatch('TEAMS/getTeam', route.params.id)
 
@@ -188,11 +204,32 @@
 				})
 			}
 
+			function hidePlayerModal() {
+				player.countryOfBirth = ''
+				player.dateOfBirth = ''
+				player.name = ''
+				player.nationality = ''
+				player.position = ''
+				player.shirtNumber = ''
+			}
+
+			function showPlayerModal(plyr) {
+				player.countryOfBirth = plyr?.countryOfBirth
+				player.dateOfBirth = plyr?.dateOfBirth
+				player.name = plyr?.name
+				player.nationality = plyr?.nationality
+				player.position = plyr?.position
+				player.shirtNumber = plyr?.shirtNumber
+			}
+
 			return {
 				filtered_players,
 				formatDate,
 				getBgColor,
 				getRandomColor,
+				hidePlayerModal,
+				player,
+				showPlayerModal,
 				team,
 			}
 		},
